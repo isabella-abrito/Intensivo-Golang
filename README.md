@@ -1,0 +1,1 @@
+Repositório destinado a pequenos programas escritos em Golang como parte do aprendizado da linguagem de programação.

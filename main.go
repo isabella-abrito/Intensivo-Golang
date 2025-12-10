@@ -9,7 +9,26 @@ import (
 
 // var a string: um jeito de declarar uma variável com tipo explícito
 
+
+//CRIANDO UMA STRUCT
+type Carro struct {
+	Nome string //atributos aqui
+}
+
+func(c Carro) andar(){ // variavel c esta fazendo referencia à estrutura.  andar() é um método!
+	fmt.Println(c.Nome, "andou")
+}
+
+
 func main() {
+
+	//testando funcao anonima q acessar a struct
+	carro := Carro{
+		Nome: "BMW",
+	} //atribuindo nome ao meu carro
+	//chamo o metodo andar atrelado ao carro que acabei de nomear
+	carro.andar()
+
 	a := "Isabella" // := declara e atribui valor à variável e o go "adivinha" qual é o tipo da variável
 	// variável não pode mudar de tipo, se eu fizer a = 1 vai dar erro!
 
@@ -41,6 +60,38 @@ func main() {
 	}
 	fmt.Println(res.Header)
 
+	
+	// se eu não quiser tratar o erro na main:
+	res2, _ := math.SomaError(7, 4) // o valor do erro vai para _ e é jogado fora
+	fmt.Println(res2)
+
+	// testando o retorno da funcao: string e inteiro
+	string, resultado := math.SomaString(20, 10)
+	fmt.Println(string, resultado)
+	// ou posso apenas printar chamando a funcao dentro do argumento: 
+	fmt.Println(math.SomaString(10, 20))
+
+	// testando funcao SomaTudo, passando quantos valores eu quiser 
+	fmt.Println(math.SomaTudo(3, 5, 4, 6, 7, 8, 280))
+
+	// trabalhando com funcao anonima
+	//a funcao retorna uma funcao - ACHEI MT COMPLICADO ESSA PARTE!  
+	result := func(x ...int) func() int{
+		resultado := 0
+		for _, v := range x { 
+			resultado += v 
+		}
+		return func() int {
+			return resultado
+		}
+	}
+
+	// como a funcao anonimia retorna outra funcao, tem q colocar o () dps de passar os argumentos
+	fmt.Println(result(45, 5, 5)()) 
+
+
+
+	//----------
 	// testando tratamento de erro na funcao SomaError quando o resultado é maior que 10
 	res1, err1 := math.SomaError(7, 4)
 	if err1 != nil {
@@ -48,7 +99,4 @@ func main() {
 	}
 	fmt.Println(res1)
 
-	// se eu não quiser tratar o erro na main:
-	res2, _ := math.SomaError(7, 4) // o valor do erro vai para _ e é jogado fora
-	fmt.Println(res2)
 } 

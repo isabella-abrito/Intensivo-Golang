@@ -1,9 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+)
 
 type Cliente struct {
-	Nome  string
+	Nome  string 
 	Email string
 	CPF   int
 }
@@ -18,8 +22,8 @@ type ClienteInternacional struct {
 	//Nome string
 	//Email string
 	//CPF int <-- atributos apagados pq são iguais aos da struct Cliente
-	Cliente //pega os atributos da struct de cima
-	Pais    string
+	Cliente        //pega os atributos da struct de cima
+	Pais    string `json:"pais"` //tag: anotacao para quando rodar a funcao de JSON vai transformar Pais em pais
 }
 
 func main() {
@@ -36,7 +40,6 @@ func main() {
 	cliente2 := Cliente{"Adriane", "adri@ane.com", 98765432100} //outra forma de preencher os dados da struct
 	fmt.Println(cliente2)
 	fmt.Printf("\nNome: %s, Email: %s, CPF: %d", cliente2.Nome, cliente2.Email, cliente2.CPF) // %s para string, %d para int
-	
 
 	cliente3 := ClienteInternacional{
 		Cliente: Cliente{ //chama a primeira struct para colocar os atributos
@@ -48,5 +51,16 @@ func main() {
 	}
 
 	fmt.Printf("\nNome: %s, Email: %s, CPF: %d, Pais: %s", cliente3.Nome, cliente3.Email, cliente3.CPF, cliente3.Pais) // não precisa fazer cliente3.Cliente.Nome
+
+	clienteJson, err := json.Marshal(cliente3) //Marshal pega dados em formato de bytes
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	fmt.Println("\n\nImprimindo em formato JSON: ", string(clienteJson)) //pega os bytes e converte em string
+
+	jsonCliente4 := `{"Nome":"Zuri","Email":"zu@ri.com","CPF":12457812220,"pais":"Africa do Sul"}`
+	cliente4 := ClienteInternacional{}
+
+	json.Unmarshal([]byte(jsonCliente4), &cliente4)
 
 }

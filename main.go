@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
 	"Aprendendo-Golang.com/math" //tem que importar o modulo externo para que a função seja reconhecida
 ) // para importar várias bibliotecas, usar essa estrutura no import
 
@@ -42,6 +41,8 @@ func main() {
 
 	variavel := 100000000
 	fmt.Println(pont(&variavel)) //pega o endereço da variavel, mas como o retorno da funcao eh o que esta guardado dentro dela, o retorno é o valor guardado lá
+	
+
 
 	a := "Isabella" // := declara e atribui valor à variável e o go "adivinha" qual é o tipo da variável
 	// variável não pode mudar de tipo, se eu fizer a = 1 vai dar erro!

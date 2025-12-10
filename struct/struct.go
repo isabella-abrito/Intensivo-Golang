@@ -1,0 +1,52 @@
+package main
+
+import "fmt"
+
+type Cliente struct {
+	Nome  string
+	Email string
+	CPF   int
+}
+
+func (c Cliente) Exibe() { //metodo ligado à struct
+
+	fmt.Println("Exibindo cliente pelo método: ", c.Nome)
+
+}
+
+type ClienteInternacional struct {
+	//Nome string
+	//Email string
+	//CPF int <-- atributos apagados pq são iguais aos da struct Cliente
+	Cliente //pega os atributos da struct de cima
+	Pais    string
+}
+
+func main() {
+	cliente := Cliente{
+		Nome:  "Isabella",
+		Email: "isabella@isabella.com",
+		CPF:   12345678900,
+	}
+
+	cliente.Exibe() //chamando o metodo ligado à struct
+
+	fmt.Println(cliente)
+
+	cliente2 := Cliente{"Adriane", "adri@ane.com", 98765432100} //outra forma de preencher os dados da struct
+	fmt.Println(cliente2)
+	fmt.Printf("\nNome: %s, Email: %s, CPF: %d", cliente2.Nome, cliente2.Email, cliente2.CPF) // %s para string, %d para int
+	
+
+	cliente3 := ClienteInternacional{
+		Cliente: Cliente{ //chama a primeira struct para colocar os atributos
+			Nome:  "Zuri",
+			Email: "zu@ri.com",
+			CPF:   12457812220,
+		},
+		Pais: "Africa do Sul",
+	}
+
+	fmt.Printf("\nNome: %s, Email: %s, CPF: %d, Pais: %s", cliente3.Nome, cliente3.Email, cliente3.CPF, cliente3.Pais) // não precisa fazer cliente3.Cliente.Nome
+
+}

@@ -59,8 +59,13 @@ func main() {
 	fmt.Println("\n\nImprimindo em formato JSON: ", string(clienteJson)) //pega os bytes e converte em string
 
 	jsonCliente4 := `{"Nome":"Zuri","Email":"zu@ri.com","CPF":12457812220,"pais":"Africa do Sul"}`
-	cliente4 := ClienteInternacional{}
+	
+	cliente4 := ClienteInternacional{} //em branco
 
-	json.Unmarshal([]byte(jsonCliente4), &cliente4)
+	//quero pegar o json e colocar no cliente4
 
+	json.Unmarshal([]byte(jsonCliente4), &cliente4) //unmarshal transforma de string para byte, &cliente4 altera o conteúdo no endereço de memória, 
+	// se passasse apenas cliente4 iria alterar os dados apenas nesse escopo, mas a variavel cliente4 continuaria em branco
+
+	fmt.Println(cliente4)
 }
